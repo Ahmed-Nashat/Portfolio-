@@ -131,19 +131,18 @@
         }
         .code-column {
             position: absolute;
-            top: -28rem;
             width: 15rem;
             color: theme('colors.primary');
             font: 12px/2 theme('fontFamily.code-sm');
             white-space: pre;
-            animation: codeDrift 24s linear infinite;
+            min-height: 16rem;
         }
-        .code-column:nth-child(1) { left: 5%; animation-delay: -7s; }
-        .code-column:nth-child(2) { left: 34%; color: theme('colors.secondary'); animation-duration: 29s; animation-delay: -18s; }
-        .code-column:nth-child(3) { right: 7%; color: theme('colors.tertiary'); animation-duration: 26s; animation-delay: -12s; }
-        .code-column:nth-child(4) { right: 31%; animation-duration: 32s; animation-delay: -24s; }
+        .code-column::after { content: '▋'; color: currentColor; animation: blink 1s step-end infinite; }
+        .code-column:nth-child(1) { left: 5%; top: 12%; }
+        .code-column:nth-child(2) { left: 34%; top: 40%; color: theme('colors.secondary'); }
+        .code-column:nth-child(3) { right: 7%; top: 18%; color: theme('colors.tertiary'); }
+        .code-column:nth-child(4) { right: 31%; top: 65%; }
         main, footer { position: relative; z-index: 1; }
-        @keyframes codeDrift { from { transform: translateY(0); } to { transform: translateY(58rem); } }
         .glow-hover:hover {
             box-shadow: 0 0 8px 1px rgba(129, 140, 248, 0.2);
             border-color: theme('colors.secondary');
@@ -430,6 +429,26 @@ while (curious) {
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const shouldReduceMotion = () => reduceMotion;
+  const codeColumns = [...document.querySelectorAll('.code-column')];
+  codeColumns.forEach((column, columnIndex) => {
+    const source = column.textContent.trim();
+    if (reduceMotion) return;
+    column.textContent = '';
+    let position = 0;
+    const typeNextCharacter = () => {
+      if (position < source.length) {
+        column.textContent += source[position++];
+        window.setTimeout(typeNextCharacter, source[position - 1] === '\n' ? 240 : 24 + Math.random() * 34);
+      } else {
+        window.setTimeout(() => {
+          column.textContent = '';
+          position = 0;
+          typeNextCharacter();
+        }, 3600 + columnIndex * 700);
+      }
+    };
+    window.setTimeout(typeNextCharacter, columnIndex * 900);
+  });
   const sections = [...document.querySelectorAll('main > section')];
   sections.forEach((section, index) => {
     section.classList.add('reveal');
