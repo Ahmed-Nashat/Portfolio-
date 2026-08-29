@@ -120,6 +120,30 @@
         .code-comment { color: theme('colors.outline'); }
         .code-function { color: theme('colors.primary'); }
         /* terminal palette */
+        .code-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: .14;
+            mask-image: linear-gradient(to bottom, transparent, black 14%, black 82%, transparent);
+        }
+        .code-column {
+            position: absolute;
+            top: -28rem;
+            width: 15rem;
+            color: theme('colors.primary');
+            font: 12px/2 theme('fontFamily.code-sm');
+            white-space: pre;
+            animation: codeDrift 24s linear infinite;
+        }
+        .code-column:nth-child(1) { left: 5%; animation-delay: -7s; }
+        .code-column:nth-child(2) { left: 34%; color: theme('colors.secondary'); animation-duration: 29s; animation-delay: -18s; }
+        .code-column:nth-child(3) { right: 7%; color: theme('colors.tertiary'); animation-duration: 26s; animation-delay: -12s; }
+        .code-column:nth-child(4) { right: 31%; animation-duration: 32s; animation-delay: -24s; }
+        main, footer { position: relative; z-index: 1; }
+        @keyframes codeDrift { from { transform: translateY(0); } to { transform: translateY(58rem); } }
         .glow-hover:hover {
             box-shadow: 0 0 8px 1px rgba(129, 140, 248, 0.2);
             border-color: theme('colors.secondary');
@@ -148,10 +172,54 @@
             .terminal-body { padding: 1rem; }
             .terminal-body pre { font-size: .78rem; }
         }
-        @media (prefers-reduced-motion: reduce) { .reveal, .stack-item { opacity: 1; transform: none; transition: none; } .glow-hover, .project-link { transition: none; } .terminal-panel, .terminal-ready, .terminal-line { animation: none; } .utility-panel:not(.hidden) { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { .reveal, .stack-item { opacity: 1; transform: none; transition: none; } .glow-hover, .project-link { transition: none; } .terminal-panel, .terminal-ready, .terminal-line, .code-column { animation: none; } .utility-panel:not(.hidden) { animation: none; } }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col pt-12 overflow-x-hidden">
+<div class="code-background" aria-hidden="true">
+<div class="code-column">const app = express();
+app.use(express.json());
+
+const developer = {
+  name: "Ahmed Nashaat",
+  role: "Full-Stack Developer",
+  status: "building"
+};
+
+app.listen(PORT);
+// reliable systems only</div>
+<div class="code-column">async function deploy(project) {
+  const build = await project.build();
+  return {
+    ready: build.success,
+    version: build.hash
+  };
+}
+
+export default deploy;
+// ship useful software</div>
+<div class="code-column">interface Experience {
+  company: string;
+  focus: string[];
+  remote: boolean;
+}
+
+const stack = [
+  "Node.js", "Express", "MongoDB", "React"
+];
+
+// learn, build, improve</div>
+<div class="code-column">function solve(problem) {
+  const context = understand(problem);
+  const system = design(context);
+  return test(system).then(ship);
+}
+
+while (curious) {
+  improve();
+}
+// clean architecture</div>
+</div>
 <!-- TopNavBar -->
 <header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-md h-12 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant font-code-md text-code-md">
 <div class="flex items-center gap-md">
