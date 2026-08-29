@@ -167,17 +167,8 @@
 <button id="command-toggle" class="p-xs text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button" aria-label="Open command menu" aria-expanded="false" aria-controls="command-menu">
 <span class="material-symbols-outlined text-[20px]">terminal</span>
 </button>
-<button id="mobile-nav-toggle" class="md:hidden p-xs text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-<span class="material-symbols-outlined text-[20px]">menu</span>
-</button>
 </div>
 </header>
-<nav id="mobile-nav" class="hidden fixed top-12 left-0 right-0 z-40 md:hidden bg-surface-container-lowest border-b border-outline-variant px-md py-sm font-code-md shadow-xl" aria-label="Mobile navigation">
-<a class="nav-link block py-sm border-b-2 border-primary text-primary" data-nav href="#home">Home</a>
-<a class="nav-link block py-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary" data-nav href="#stack">Stack</a>
-<a class="nav-link block py-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary" data-nav href="#projects">Projects</a>
-<a class="nav-link block py-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary" data-nav href="#contact">Contact</a>
-</nav>
 <section id="command-menu" class="utility-panel hidden fixed z-[60] top-14 right-3 w-72 max-w-[calc(100vw-1.5rem)] bg-surface-container border border-outline-variant rounded-lg shadow-2xl p-sm font-code-sm" role="dialog" aria-label="Command menu">
 <div class="flex items-center justify-between px-xs pb-sm mb-xs border-b border-outline-variant"><span class="text-secondary">COMMAND_PALETTE</span><span class="text-on-surface-variant">⌘</span></div>
 <div class="grid gap-xs">
@@ -390,17 +381,6 @@
 
   const navLinks = [...document.querySelectorAll('[data-nav]')];
   const navTargets = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-  const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  const closeMobileNavigation = () => {
-    mobileNav.classList.add('hidden');
-    mobileNavToggle.setAttribute('aria-expanded', 'false');
-  };
-  mobileNavToggle.addEventListener('click', () => {
-    const opening = mobileNav.classList.contains('hidden');
-    mobileNav.classList.toggle('hidden', !opening);
-    mobileNavToggle.setAttribute('aria-expanded', String(opening));
-  });
   const setActiveNav = (id) => {
     navLinks.forEach((link) => {
       const active = link.getAttribute('href') === `#${id}`;
@@ -418,7 +398,6 @@
     target.scrollIntoView({ behavior: shouldReduceMotion() ? 'auto' : 'smooth', block: 'start' });
     history.replaceState(null, '', link.getAttribute('href'));
     setActiveNav(target.id);
-    closeMobileNavigation();
   }));
   if ('IntersectionObserver' in window && navTargets.length) {
     const navObserver = new IntersectionObserver((entries) => {
@@ -447,10 +426,6 @@
     stackObserver.observe(document.getElementById('stack'));
   }
 
-  document.addEventListener('click', (event) => {
-    if (!mobileNav.contains(event.target) && !mobileNavToggle.contains(event.target)) closeMobileNavigation();
-  });
-
   const commandToggle = document.getElementById('command-toggle');
   const commandMenu = document.getElementById('command-menu');
   const closeUtilityPanels = () => {
@@ -470,7 +445,7 @@
     if (!commandMenu.contains(event.target) && !commandToggle.contains(event.target)) closeUtilityPanels();
   });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') { closeUtilityPanels(); closeMobileNavigation(); }
+    if (event.key === 'Escape') closeUtilityPanels();
   });
   const navigateTo = (selector) => {
     const target = document.querySelector(selector);
@@ -479,7 +454,6 @@
     history.replaceState(null, '', selector);
     setActiveNav(target.id);
     closeUtilityPanels();
-    closeMobileNavigation();
   };
   document.querySelectorAll('[data-scroll]').forEach((button) => button.addEventListener('click', () => navigateTo(button.dataset.scroll)));
   document.getElementById('copy-email').addEventListener('click', async (event) => {
