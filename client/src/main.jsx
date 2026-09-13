@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import Dashboard from './admin';
 
 function App() {
+  if (window.location.pathname === '/admin' || window.location.pathname === '/admin/') return <Dashboard />;
   return <iframe className="portfolio-frame" src="/portfolio.html" title="Ahmed Nashaat Backend Developer Portfolio" />;
 }
 
