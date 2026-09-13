@@ -427,12 +427,24 @@ while (curious) {
 </div>
 </footer>
 <script>
-  const savedContent = (() => { try { return JSON.parse(localStorage.getItem('portfolio-content-v1')); } catch (_) { return null; } })();
+  (async () => {
+  const savedContent = await (async () => {
+    try {
+      const response = await fetch('/api/content', { signal: AbortSignal.timeout(5000) });
+      if (response.ok) return (await response.json()).content;
+    } catch (_) {}
+    try { const fallback = await fetch('/content.json'); return fallback.ok ? await fallback.json() : null; } catch (_) { return null; }
+  })();
   if (savedContent) {
     const text = (selector, value) => { const element = document.querySelector(selector); if (element && value != null) element.textContent = value; };
     const link = (selector, value, label) => { const element = document.querySelector(selector); if (element && value) { element.href = value; if (label) element.firstChild.textContent = label; } };
     text('header .font-headline-md', savedContent.site?.brand);
     text('#home .text-center', savedContent.site?.terminalTitle);
+    text('#home .terminal-line[style="--line: 11"] .code-string', JSON.stringify(savedContent.site?.role));
+    text('#home .terminal-line[style="--line: 13"] .code-string', JSON.stringify(savedContent.site?.status));
+    text('#projects .mb-xl p', `${savedContent.projects?.length || 0} systems online | Selected product work`);
+    const githubCommand = document.querySelector('#command-menu a');
+    if (githubCommand && savedContent.contact?.github) githubCommand.href = savedContent.contact.github;
     const about = document.querySelector('#home + section .relative');
     if (about && savedContent.about) { const paragraphs = about.querySelectorAll('p'); if (paragraphs[1]) paragraphs[1].textContent = savedContent.about.intro; if (paragraphs[2]) paragraphs[2].textContent = savedContent.about.body; }
     const philosophyList = document.querySelector('#home + section ul');
@@ -569,12 +581,13 @@ while (curious) {
   document.getElementById('copy-email').addEventListener('click', async (event) => {
     const button = event.currentTarget;
     try {
-      await navigator.clipboard.writeText('ahmadnashat04@gmail.com');
+      await navigator.clipboard.writeText(savedContent?.contact?.email || 'ahmadnashat04@gmail.com');
       button.textContent = 'EMAIL_COPIED ✓';
     } catch (_) {
-      button.textContent = 'EMAIL: ahmadnashat04@gmail.com';
+      button.textContent = `EMAIL: ${savedContent?.contact?.email || 'ahmadnashat04@gmail.com'}`;
     }
     window.setTimeout(() => { button.textContent = 'COPY_EMAIL'; }, 1800);
   });
+  })();
 </script>
 </body></html>

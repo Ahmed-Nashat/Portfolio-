@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-import Dashboard from './admin';
+import './admin-auth.css';
+import Dashboard from './admin-session';
 
 function App() {
   if (window.location.pathname === '/admin' || window.location.pathname === '/admin/') return <Dashboard />;

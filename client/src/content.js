@@ -1,5 +1,3 @@
-export const contentKey = 'portfolio-content-v1';
-
 export const defaultContent = {
   site: {
     brand: 'start:dev',
@@ -29,11 +27,12 @@ export const defaultContent = {
   ],
 };
 
-export function loadContent() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(contentKey));
-    return saved ? { ...defaultContent, ...saved } : structuredClone(defaultContent);
-  } catch { return structuredClone(defaultContent); }
+export function validateImport(value, template = defaultContent) {
+  if (Array.isArray(template)) {
+    if (!Array.isArray(value) || value.length > 100) throw new Error('Invalid list');
+    value.forEach(item => validateImport(item, template[0]));
+  } else if (template && typeof template === 'object') {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Invalid section');
+    Object.keys(template).forEach(key => validateImport(value[key], template[key]));
+  } else if (typeof value !== 'string' || value.length > 8000) throw new Error('Invalid text');
 }
-
-export function saveContent(content) { localStorage.setItem(contentKey, JSON.stringify(content)); }

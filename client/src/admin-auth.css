@@ -1,0 +1,11 @@
+.admin-login { max-width: 560px; margin: 12vh auto; padding: 32px; border: 1px solid #363636; border-radius: 8px; background: #181818; }
+.admin-login h1 { font: 600 clamp(24px, 5vw, 34px)/1.2 Arial, sans-serif; }
+.admin-login p { color: #b8b8b8; line-height: 1.7; }
+.admin-login a { display: block; color: #68fcbf; margin-top: 24px; }
+.admin-login .login-button { padding: 16px; border: 1px solid #68fcbf; border-radius: 4px; text-decoration: none; text-align: center; }
+.admin-login [role=alert] { color: #ffb4ab; }
+.admin-shell button:disabled { opacity: .5; cursor: wait; }
+.admin-save-bar { gap: 16px; }
+.admin-save-bar [role=status] { line-height: 1.5; color: #b8b8b8; }
+.admin-header-actions { flex-wrap: wrap; }
+@media (max-width: 600px) { .admin-login { margin: 8vh 16px; padding: 24px; } .admin-save-bar { position: static; margin-top: 32px; flex-wrap: wrap; } }
