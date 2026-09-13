@@ -1,0 +1,128 @@
+{
+  "site": {
+    "brand": "start:dev",
+    "terminalTitle": "app.js - start:dev",
+    "role": "Backend developer",
+    "status": "BUILDING_TO_LAST"
+  },
+  "about": {
+    "intro": "Hey there! I’m a Backend Developer studying Software Industry & Multimedia at Alexandria University.",
+    "body": "Currently, I lead engineering efforts as Head of Development at Knzify—handling everything from backend architecture to frontend UI. I love tackling tough technical challenges, improving my craft, and building software that genuinely helps people.",
+    "philosophies": [
+      "Reliability is a product feature.",
+      "Clear architecture beats clever complexity.",
+      "Build technology that solves real problems."
+    ]
+  },
+  "education": {
+    "degree": "B.Sc. Computer Science — Software Industry & Multimedia",
+    "school": "Alexandria University",
+    "years": "2025–2029"
+  },
+  "contact": {
+    "intro": "Have a project ? Let’s talk.",
+    "email": "ahmadnashat04@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ahmed-nashaat-b0ab08374/",
+    "github": "https://github.com/Ahmed-Nashat"
+  },
+  "stack": [
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "SQL",
+    "REST APIs",
+    "API Integration",
+    "Data Management",
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "Python",
+    "Java",
+    "Git",
+    "PyQt6",
+    "SHA-256",
+    "SaaS Platforms",
+    "Team Working",
+    "Problem Solving"
+  ],
+  "projects": [
+    {
+      "id": "program-lms",
+      "name": "program_lms",
+      "icon": "school",
+      "description": "Learning management platform for browsing courses, enrolling, and tracking student progress. Built from the ground up with connected backend and frontend features.",
+      "link": "https://github.com/omar-abdelazim-dev/program",
+      "skills": [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "React"
+      ]
+    },
+    {
+      "id": "knzify",
+      "name": "knzify",
+      "icon": "rocket_launch",
+      "description": "Scalable product platform foundation focused on performance, security, reliability, and developer experience.",
+      "link": "https://github.com/Ahmed-Nashat/knzify",
+      "skills": [
+        "Node.js",
+        "React"
+      ]
+    },
+    {
+      "id": "secure-user-management",
+      "name": "secure_user_management",
+      "icon": "admin_panel_settings",
+      "description": "Desktop user-management application with modular authentication, SHA-256 password hashing, password-strength validation, and local CSV persistence.",
+      "link": "https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256",
+      "skills": [
+        "Python",
+        "PyQt6",
+        "SHA-256"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "route",
+      "date": "JUL 2026 — NOW",
+      "title": "Backend Development Participant · Route Academy",
+      "subtitle": "Node.js Backend Development Program",
+      "description": "Building practical backend projects and strengthening Node.js, Express, and production-oriented backend development skills.",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": "knzify-experience",
+      "date": "AUG 2026 — NOW",
+      "title": "Co-Founder & Head of Development · Knzify",
+      "subtitle": "",
+      "description": "Lead technical vision and development execution, shaping scalable SaaS architecture, APIs, product capabilities, and engineering workflows.",
+      "status": "BUILDING_TO_LAST"
+    },
+    {
+      "id": "program-experience",
+      "date": "JUL — SEP 2026",
+      "title": "Full-Stack Developer · PROGRAM",
+      "subtitle": "",
+      "description": "Built product features from the ground up across Node.js backend and frontend layers, connecting requirements to reliable user-facing functionality.",
+      "status": "SHIPPED"
+    },
+    {
+      "id": "nti",
+      "date": "JUL — AUG 2026",
+      "title": "Cloud Essentials Intern · National Telecommunication Institute",
+      "subtitle": "",
+      "description": "Developed foundational knowledge in cloud computing, virtualization, networking, cloud services, security, and modern cloud infrastructure.",
+      "status": "COMPLETED"
+    },
+    {
+      "id": "gci",
+      "date": "APR — AUG 2026",
+      "title": "GCI World 2026 Program · Matsuo-Iwasawa Lab, U-Tokyo",
+      "subtitle": "",
+      "description": "Learned data science, machine learning, and AI through Python-based projects, data analysis, real-world problem solving, and international collaboration.",
+      "status": "COMPLETED"
+    }
+  ]
+}
