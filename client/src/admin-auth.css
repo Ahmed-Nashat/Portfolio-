@@ -9,3 +9,5 @@
 .admin-save-bar [role=status] { line-height: 1.5; color: #b8b8b8; }
 .admin-header-actions { flex-wrap: wrap; }
 @media (max-width: 600px) { .admin-login { margin: 8vh 16px; padding: 24px; } .admin-save-bar { position: static; margin-top: 32px; flex-wrap: wrap; } }
+.admin-sidebar { min-width: 0; }
+.admin-status span { white-space: normal; overflow-wrap: anywhere; line-height: 1.6; }
