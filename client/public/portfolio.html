@@ -158,6 +158,28 @@
         .terminal-code { white-space: normal; }
         .terminal-line { display: block; white-space: pre; opacity: 0; transform: translateY(4px); animation: terminalLineIn 260ms cubic-bezier(.22,1,.36,1) forwards; animation-delay: calc(280ms + (var(--line) * 42ms)); }
         .project-link { transition: transform 180ms ease, color 180ms ease; }
+        /* Content-sized bento cards: a final unpaired project fills the row. */
+        #projects > .grid { grid-template-columns: minmax(0, 1fr); }
+        #projects .project-card { grid-column: auto; min-width: 0; display: flex; flex-direction: column; }
+        #projects .project-card > div:first-child { gap: 1rem; }
+        #projects .project-card > div:first-child > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+        #projects .project-card > div:first-child > .material-symbols-outlined { flex-shrink: 0; }
+        #projects .project-card > div:last-child { display: flex; flex-direction: column; align-items: flex-start; flex: 1; }
+        #projects .project-card p { overflow-wrap: anywhere; }
+        #projects .project-link { margin-top: auto; padding-top: 1.25rem; }
+        @media (min-width: 640px) {
+            #projects > .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            #projects .project-card { min-height: 18rem; }
+            #projects .project-card:last-child:nth-child(odd) { grid-column: 1 / -1; min-height: 0; }
+        }
+        @media (min-width: 1024px) {
+            #projects > .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            #projects .project-card:nth-child(4n + 1),
+            #projects .project-card:nth-child(4n + 4) { grid-column: span 4; }
+            #projects .project-card:nth-child(4n + 2),
+            #projects .project-card:nth-child(4n + 3) { grid-column: span 2; }
+            #projects .project-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+        }
         .project-card:hover .project-link, .project-card:focus-within .project-link { transform: translateX(5px); color: theme('colors.tertiary'); }
         .stack-item { opacity: 0; transform: translateY(10px); transition: opacity 300ms ease, transform 300ms cubic-bezier(.22,1,.36,1); transition-delay: calc(var(--stack-delay) * 70ms); }
         .stack-item.is-visible { opacity: 1; transform: translateY(0); }
