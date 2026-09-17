@@ -81,6 +81,19 @@
         "PyQt6",
         "SHA-256"
       ]
+    },
+    {
+      "id": "project-1789642744982",
+      "name": "University Management System",
+      "icon": "code",
+      "description": "University Management System — Backend Development\n\nBuilt a university management application using Node.js, Express, MySQL, and Sequelize. Designed the database and ERDs, developed REST APIs, and implemented authentication, role-based access, error handling, enrollment validation, and timetable conflict detection.\n\n",
+      "link": "https://github.com/Ahmed-Nashat/University_Management_System",
+      "skills": [
+        "Node.js",
+        "Express",
+        "Sequelize",
+        "REST API"
+      ]
     }
   ],
   "experience": [
