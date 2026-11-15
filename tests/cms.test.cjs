@@ -24,10 +24,10 @@ test('unauthenticated publishing and cross-origin publishing are rejected', asyn
 test('validation accepts defaults, rejects unsafe links, malformed imports, and duplicate IDs', async () => {
   const { defaultContent } = await import('../client/src/content.js');
   assert.equal(cms.validateContent(defaultContent).projects.length, 3);
-  const content = structuredClone(defaultContent); content.projects[0].link = 'javascript:alert(1)';
+  const content = structuredClone(defaultContent); content.projects[0].githubUrl = 'javascript:alert(1)';
   assert.throws(() => cms.validateContent(content), /Links/);
   assert.throws(() => cms.validateContent({ projects: [] }));
-  content.projects[0].link = 'https://example.com'; content.projects[1].id = content.projects[0].id;
+  content.projects[0].githubUrl = 'https://example.com'; content.projects[1].id = content.projects[0].id;
   assert.throws(() => cms.validateContent(content), /Duplicate/);
 });
 test('invalid OAuth state never exchanges a code or creates a session', async () => {

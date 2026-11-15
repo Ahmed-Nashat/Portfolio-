@@ -19,6 +19,8 @@ The app requests `public_repo` scope to write the public portfolio repository. T
 
 ## Behavior
 
+- Projects have independent optional `githubUrl` and `liveUrl` fields. Old `link` records and JSON backups are normalized on load: github.com URLs become repository links, other URLs become live demos. Explicit new fields take precedence, including empty strings. Publishing writes the new fields; original remote records are otherwise untouched until you publish. Cards show only available safe HTTP(S) links and open them in new tabs.
+
 - Authentication tokens remain in encrypted HttpOnly, Secure cookies with an eight-hour session lifetime. Logout clears the browser session. GitHub can revoke the OAuth grant under Settings → Applications.
 - Mutation endpoints reject unauthenticated requests and requests from another origin. All submitted content is validated server-side; links must use HTTP(S).
 - Publishing checks the file revision, so a stale editor cannot overwrite a newer save. Export your draft before reloading to resolve a conflict.

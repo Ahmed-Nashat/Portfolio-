@@ -1,3 +1,7 @@
+import '../public/project-links.js';
+export const normalizeProject = globalThis.PortfolioProjectLinks.normalizeProject;
+export function normalizeContent(content) { return { ...content, projects: content.projects.map(normalizeProject) }; }
+
 export const defaultContent = {
   site: {
     brand: 'start:dev',
@@ -14,9 +18,9 @@ export const defaultContent = {
   contact: { intro: 'Have a project or opportunity? Let’s talk.', email: 'ahmadnashat04@gmail.com', linkedin: 'https://www.linkedin.com/in/ahmed-nashaat-b0ab08374/', github: 'https://github.com/Ahmed-Nashat' },
   stack: ['Node.js', 'Express', 'MongoDB', 'SQL', 'REST APIs', 'API Integration', 'Data Management', 'React', 'JavaScript', 'HTML', 'CSS', 'Python', 'Java', 'Git', 'PyQt6', 'SHA-256', 'SaaS Platforms', 'Team Working', 'Problem Solving'],
   projects: [
-    { id: 'program-lms', name: 'program_lms', icon: 'school', description: 'Learning management platform for browsing courses, enrolling, and tracking student progress. Built from the ground up with connected backend and frontend features.', skills: ['Node.js', 'Express', 'MongoDB', 'React'], link: 'https://github.com/omar-abdelazim-dev/program' },
-    { id: 'knzify', name: 'knzify', icon: 'rocket_launch', description: 'Scalable product platform foundation focused on performance, security, reliability, and developer experience.', skills: ['Node.js', 'React'], link: 'https://github.com/Ahmed-Nashat/knzify' },
-    { id: 'secure-user-management', name: 'secure_user_management', icon: 'admin_panel_settings', description: 'Desktop user-management application with modular authentication, SHA-256 password hashing, password-strength validation, and local CSV persistence.', skills: ['Python', 'PyQt6', 'SHA-256'], link: 'https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256' },
+    { id: 'program-lms', name: 'program_lms', icon: 'school', description: 'Learning management platform for browsing courses, enrolling, and tracking student progress. Built from the ground up with connected backend and frontend features.', skills: ['Node.js', 'Express', 'MongoDB', 'React'], liveUrl: '', githubUrl: 'https://github.com/omar-abdelazim-dev/program' },
+    { id: 'knzify', name: 'knzify', icon: 'rocket_launch', description: 'Scalable product platform foundation focused on performance, security, reliability, and developer experience.', skills: ['Node.js', 'React'], liveUrl: '', githubUrl: 'https://github.com/Ahmed-Nashat/knzify' },
+    { id: 'secure-user-management', name: 'secure_user_management', icon: 'admin_panel_settings', description: 'Desktop user-management application with modular authentication, SHA-256 password hashing, password-strength validation, and local CSV persistence.', skills: ['Python', 'PyQt6', 'SHA-256'], liveUrl: '', githubUrl: 'https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256' },
   ],
   experience: [
     { id: 'route', date: 'JUL 2026 — NOW', title: 'Backend Development Participant · Route Academy', subtitle: 'Node.js Backend Development Program', description: 'Building practical backend projects and strengthening Node.js, Express, and production-oriented backend development skills.', status: 'IN_PROGRESS' },
@@ -26,6 +30,8 @@ export const defaultContent = {
     { id: 'gci', date: 'APR — AUG 2026', title: 'GCI World 2026 Program · Matsuo-Iwasawa Lab, U-Tokyo', subtitle: '', description: 'Learned data science, machine learning, and AI through Python-based projects, data analysis, real-world problem solving, and international collaboration.', status: 'COMPLETED' },
   ],
 };
+
+defaultContent.projects = defaultContent.projects.map(normalizeProject);
 
 export function validateImport(value, template = defaultContent) {
   if (Array.isArray(template)) {
