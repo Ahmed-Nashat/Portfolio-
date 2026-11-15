@@ -90,7 +90,7 @@
     {
       "id": "project-1794762605504",
       "name": "LunarSight",
-      "icon": "moon",
+      "icon": "dark_mode",
       "description": "LunarSight is an immersive, interactive lunar exploration platform developed for the NASA Space Apps Challenge 2026, addressing the Lunar Landing Site Navigator challenge.\n\nThe platform features an interactive 3D Moon, dynamic scroll-driven animations, and lunar terrain exploration, providing an engaging experience for investigating potential Moon landing sites.\n\nBuilt around official NASA and Canadian Space Agency resources, including LROC QuickMap, NASA Moon Trek, JPL Horizons, and Canadian Space Agency Moon Exploration, LunarSight combines scientific exploration with modern web technologies and immersive UI/UX design.",
       "githubUrl": "https://github.com/Ahmed-Nashat/NASA_SPACE_APP",
       "liveUrl": "https://nasa-space-app-lyart.vercel.app/",
