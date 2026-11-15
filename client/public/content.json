@@ -51,7 +51,8 @@
       "name": "program_lms",
       "icon": "school",
       "description": "Learning management platform for browsing courses, enrolling, and tracking student progress. Built from the ground up with connected backend and frontend features.",
-      "link": "https://github.com/omar-abdelazim-dev/program",
+      "githubUrl": "https://github.com/omar-abdelazim-dev/program",
+      "liveUrl": "",
       "skills": [
         "Node.js",
         "Express",
@@ -64,7 +65,8 @@
       "name": "secure_user_management",
       "icon": "admin_panel_settings",
       "description": "Desktop user-management application with modular authentication, SHA-256 password hashing, password-strength validation, and local CSV persistence.",
-      "link": "https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256",
+      "githubUrl": "https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256",
+      "liveUrl": "",
       "skills": [
         "Python",
         "PyQt6",
@@ -76,12 +78,32 @@
       "name": "University Management System",
       "icon": "code",
       "description": "University Management System — Backend Development\n\nBuilt a university management application using Node.js, Express, MySQL, and Sequelize. Designed the database and ERDs, developed REST APIs, and implemented authentication, role-based access, error handling, enrollment validation, and timetable conflict detection.\n\n",
-      "link": "https://github.com/Ahmed-Nashat/University_Management_System",
+      "githubUrl": "https://github.com/Ahmed-Nashat/University_Management_System",
+      "liveUrl": "",
       "skills": [
         "Node.js",
         "Express",
         "Sequelize",
         "REST API"
+      ]
+    },
+    {
+      "id": "project-1794762605504",
+      "name": "LunarSight",
+      "icon": "moon",
+      "description": "LunarSight is an immersive, interactive lunar exploration platform developed for the NASA Space Apps Challenge 2026, addressing the Lunar Landing Site Navigator challenge.\n\nThe platform features an interactive 3D Moon, dynamic scroll-driven animations, and lunar terrain exploration, providing an engaging experience for investigating potential Moon landing sites.\n\nBuilt around official NASA and Canadian Space Agency resources, including LROC QuickMap, NASA Moon Trek, JPL Horizons, and Canadian Space Agency Moon Exploration, LunarSight combines scientific exploration with modern web technologies and immersive UI/UX design.",
+      "githubUrl": "https://github.com/Ahmed-Nashat/NASA_SPACE_APP",
+      "liveUrl": "https://nasa-space-app-lyart.vercel.app/",
+      "skills": [
+        "React.js",
+        "JavaScript",
+        "Three.js",
+        "3D Visualization",
+        "UI/UX Design",
+        "Geospatial Visualization",
+        "API Integration",
+        "Git",
+        "GitHub"
       ]
     }
   ],
