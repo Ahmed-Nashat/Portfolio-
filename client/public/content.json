@@ -60,17 +60,6 @@
       ]
     },
     {
-      "id": "knzify",
-      "name": "knzify",
-      "icon": "rocket_launch",
-      "description": "Scalable product platform foundation focused on performance, security, reliability, and developer experience.",
-      "link": "https://github.com/Ahmed-Nashat/knzify",
-      "skills": [
-        "Node.js",
-        "React"
-      ]
-    },
-    {
       "id": "secure-user-management",
       "name": "secure_user_management",
       "icon": "admin_panel_settings",
