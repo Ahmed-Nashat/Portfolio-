@@ -135,7 +135,7 @@
       "features": "- Anonymous messaging functionality\n- RESTful API architecture using Node.js and Express.js\n- JWT-based authentication and access control\n- Secure password hashing using bcrypt\n- MongoDB database integration with Mongoose\n- Request validation using Zod\n- Redis integration\n- API security using Helmet and rate limiting\n- Angular frontend integration\n- Environment-based configuration and modular backend structure",
       "screenshots": "",
       "githubUrl": "https://github.com/Ahmed-Nashat/Saraha_App",
-      "liveUrl": "",
+      "liveUrl": "http://51.21.184.246/",
       "skills": [
         "Node.js",
         "Express.js",
