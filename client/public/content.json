@@ -42,8 +42,9 @@
     "PyQt6",
     "SHA-256",
     "SaaS Platforms",
-    "Team Working",
-    "Problem Solving"
+    "Team Working ",
+    "Problem Solving ",
+    "TypeScript"
   ],
   "projects": [
     {
@@ -104,6 +105,29 @@
         "API Integration",
         "Git",
         "GitHub"
+      ]
+    },
+    {
+      "id": "project-1794839155508",
+      "name": "Saraha — Anonymous Messaging Platform",
+      "icon": "message",
+      "description": "Developed a full-stack anonymous messaging platform with an Angular frontend and a backend powered by Node.js, Express.js, and MongoDB. Designed RESTful APIs for the application's messaging workflows, with an emphasis on scalable backend architecture, secure authentication, and data management. Integrated JWT-based authentication, bcrypt password hashing, Zod request validation, Redis, and API security middleware including Helmet and rate limiting. Structured the application with maintainability, security, and separation of concerns in mind",
+      "githubUrl": "https://github.com/Ahmed-Nashat/Saraha_App",
+      "liveUrl": "",
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "MongoDB",
+        "Mongoose",
+        "Redis",
+        "JWT",
+        "REST",
+        "APIs",
+        "Zod",
+        "bcrypt",
+        "Helmet",
+        "API Security"
       ]
     }
   ],
