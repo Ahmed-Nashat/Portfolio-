@@ -164,7 +164,6 @@
         ::-webkit-scrollbar-thumb { background: #557a68; border: 2px solid #131313; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #80dfb5; }
         #command-toggle:focus-visible { outline: 2px solid #80dfb5; outline-offset: 3px; }
-        @media (hover: hover) and (pointer: fine) { #projects .project-card { position: relative; isolation: isolate; } #projects .project-card::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; background: radial-gradient(240px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(104,252,191,.12), transparent 70%); transition: opacity 180ms ease; } #projects .project-card:hover::before { opacity: 1; } }
         #projects .project-card:active { transform: scale(.99); }
         .portfolio-dialog[open] { animation: logPanelIn 240ms ease-out both; }
         .portfolio-dialog[open] > :not(button) { animation: logContentIn 300ms ease-out both; }
@@ -174,7 +173,7 @@
         .feedback-toast { position: fixed; z-index: 100; right: 1rem; bottom: 1rem; max-width: calc(100vw - 2rem); padding: .8rem 1rem; background: #1d2822; border: 1px solid #68fcbf; border-radius: 4px; color: #b8f5d4; font: 12px 'JetBrains Mono', monospace; box-shadow: 0 8px 24px #0008; }
         @keyframes logPanelIn { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
         @keyframes logContentIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-        @media (prefers-reduced-motion: reduce) { .portfolio-dialog[open], .portfolio-dialog[open] > :not(button) { animation: none; } #projects .project-card:active { transform: none; } #projects .project-card::before { display: none; } .terminal-line { opacity: 1; transform: none; } .terminal-cursor, .code-column::after { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { .portfolio-dialog[open], .portfolio-dialog[open] > :not(button) { animation: none; } #projects .project-card:active { transform: none; } .terminal-line { opacity: 1; transform: none; } .terminal-cursor, .code-column::after { animation: none; } }
         .project-details-trigger, .skills-project { background: transparent; border: 1px solid #444; border-radius: 4px; color: #80dfb5; cursor: pointer; padding: .6rem .8rem; font: inherit; }
         .project-details-trigger:hover, .skills-project:hover { border-color: #80dfb5; }
         .portfolio-dialog { color: #e4e2e1; background: #1b1b1b; border: 1px solid #555; border-radius: 8px; width: min(720px, 90vw); max-height: 85vh; padding: 1.5rem; }
@@ -561,13 +560,6 @@ while (curious) {
     document.addEventListener('visibilitychange', resume);
     typingTimers[columnIndex] = window.setTimeout(typeNextCharacter, columnIndex * 900);
   });
-  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('#projects .project-card').forEach(card => card.addEventListener('pointermove', event => {
-      const bounds = card.getBoundingClientRect();
-      card.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
-      card.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
-    }, { passive: true }));
-  }
   const sections = [...document.querySelectorAll('main > section')];
   sections.forEach((section, index) => {
     section.classList.add('reveal');
