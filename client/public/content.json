@@ -3,11 +3,13 @@
     "brand": "start:dev",
     "terminalTitle": "app.js - start:dev",
     "role": "Backend developer",
-    "status": "BUILDING_TO_LAST"
+    "status": "BUILDING_TO_LAST",
+    "skillsEvidence": false
   },
   "about": {
     "intro": "Hey there! I’m a Backend Developer studying Software Industry & Multimedia at Alexandria University.",
     "body": "Currently, I lead engineering efforts as Head of Development at Knzify—handling everything from backend architecture to frontend UI. I love tackling tough technical challenges, improving my craft, and building software that genuinely helps people.",
+    "portrait": "",
     "philosophies": [
       "Reliability is a product feature.",
       "Clear architecture beats clever complexity.",
@@ -52,6 +54,10 @@
       "name": "program_lms",
       "icon": "school",
       "description": "Learning management platform for browsing courses, enrolling, and tracking student progress. Built from the ground up with connected backend and frontend features.",
+      "problem": "",
+      "role": "",
+      "features": "",
+      "screenshots": "",
       "githubUrl": "https://github.com/omar-abdelazim-dev/program",
       "liveUrl": "",
       "skills": [
@@ -66,6 +72,10 @@
       "name": "secure_user_management",
       "icon": "admin_panel_settings",
       "description": "Desktop user-management application with modular authentication, SHA-256 password hashing, password-strength validation, and local CSV persistence.",
+      "problem": "",
+      "role": "",
+      "features": "",
+      "screenshots": "",
       "githubUrl": "https://github.com/Ahmed-Nashat/Secure_User_Management_SHA256",
       "liveUrl": "",
       "skills": [
@@ -79,6 +89,10 @@
       "name": "University Management System",
       "icon": "code",
       "description": "University Management System — Backend Development\n\nBuilt a university management application using Node.js, Express, MySQL, and Sequelize. Designed the database and ERDs, developed REST APIs, and implemented authentication, role-based access, error handling, enrollment validation, and timetable conflict detection.\n\n",
+      "problem": "",
+      "role": "",
+      "features": "",
+      "screenshots": "",
       "githubUrl": "https://github.com/Ahmed-Nashat/University_Management_System",
       "liveUrl": "",
       "skills": [
@@ -93,6 +107,10 @@
       "name": "LunarSight",
       "icon": "dark_mode",
       "description": "LunarSight is an immersive, interactive lunar exploration platform developed for the NASA Space Apps Challenge 2026, addressing the Lunar Landing Site Navigator challenge.\n\nThe platform features an interactive 3D Moon, dynamic scroll-driven animations, and lunar terrain exploration, providing an engaging experience for investigating potential Moon landing sites.\n\nBuilt around official NASA and Canadian Space Agency resources, including LROC QuickMap, NASA Moon Trek, JPL Horizons, and Canadian Space Agency Moon Exploration, LunarSight combines scientific exploration with modern web technologies and immersive UI/UX design.",
+      "problem": "",
+      "role": "",
+      "features": "",
+      "screenshots": "",
       "githubUrl": "https://github.com/Ahmed-Nashat/NASA_SPACE_APP",
       "liveUrl": "https://nasa-space-app-lyart.vercel.app/",
       "skills": [
@@ -112,6 +130,10 @@
       "name": "Saraha — Anonymous Messaging Platform",
       "icon": "message",
       "description": "Developed a full-stack anonymous messaging platform with an Angular frontend and a backend powered by Node.js, Express.js, and MongoDB. Designed RESTful APIs for the application's messaging workflows, with an emphasis on scalable backend architecture, secure authentication, and data management. Integrated JWT-based authentication, bcrypt password hashing, Zod request validation, Redis, and API security middleware including Helmet and rate limiting. Structured the application with maintainability, security, and separation of concerns in mind",
+      "problem": "Building an anonymous messaging platform requires balancing user privacy with secure authentication, efficient data management, and protection against API abuse. The main technical challenge was designing a maintainable backend architecture capable of supporting anonymous communication while protecting user accounts, validating incoming requests, and managing database interactions securely.",
+      "role": "Developed the application's backend using Node.js, Express.js, and MongoDB, focusing on RESTful API design, authentication, database modeling, and application security. Worked with JWT, bcrypt, Zod, Redis, and security middleware to build a structured backend. Also worked on the Angular frontend integration to connect the user interface with backend services.",
+      "features": "- Anonymous messaging functionality\n- RESTful API architecture using Node.js and Express.js\n- JWT-based authentication and access control\n- Secure password hashing using bcrypt\n- MongoDB database integration with Mongoose\n- Request validation using Zod\n- Redis integration\n- API security using Helmet and rate limiting\n- Angular frontend integration\n- Environment-based configuration and modular backend structure",
+      "screenshots": "",
       "githubUrl": "https://github.com/Ahmed-Nashat/Saraha_App",
       "liveUrl": "",
       "skills": [
