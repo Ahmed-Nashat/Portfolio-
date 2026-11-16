@@ -110,7 +110,7 @@
     {
       "id": "project-1794839155508",
       "name": "Saraha — Anonymous Messaging Platform",
-      "icon": "message-square",
+      "icon": "message",
       "description": "Developed a full-stack anonymous messaging platform with an Angular frontend and a backend powered by Node.js, Express.js, and MongoDB. Designed RESTful APIs for the application's messaging workflows, with an emphasis on scalable backend architecture, secure authentication, and data management. Integrated JWT-based authentication, bcrypt password hashing, Zod request validation, Redis, and API security middleware including Helmet and rate limiting. Structured the application with maintainability, security, and separation of concerns in mind",
       "githubUrl": "https://github.com/Ahmed-Nashat/Saraha_App",
       "liveUrl": "",
