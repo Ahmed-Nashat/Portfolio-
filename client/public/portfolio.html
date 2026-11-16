@@ -127,24 +127,34 @@
             overflow: hidden;
             pointer-events: none;
             opacity: .14;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            padding: 5rem 2rem 2rem;
             mask-image: linear-gradient(to bottom, transparent, black 14%, black 82%, transparent);
         }
         .code-column {
-            position: absolute;
-            width: 15rem;
+            position: relative;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
             color: theme('colors.primary');
             font: 12px/2 theme('fontFamily.code-sm');
             white-space: pre;
-            min-height: 16rem;
         }
         .code-column::after { content: '▋'; color: currentColor; animation: blink 1s step-end infinite; }
-        .code-column:nth-child(1) { left: 5%; top: 12%; }
-        .code-column:nth-child(2) { left: 34%; top: 40%; color: theme('colors.secondary'); }
-        .code-column:nth-child(3) { right: 7%; top: 18%; color: theme('colors.tertiary'); }
-        .code-column:nth-child(4) { right: 31%; top: 65%; }
+        .code-column:nth-child(2) { color: theme('colors.secondary'); }
+        .code-column:nth-child(3) { color: theme('colors.tertiary'); }
         .code-column.code-error { color: #ff7777; }
-        .code-column:nth-child(5) { left: 8%; top: 67%; }
-        .code-column:nth-child(6) { right: 4%; top: 52%; }
+        @media (max-width: 767px) {
+            .code-background { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4rem 1rem 1rem; }
+            .code-column:nth-child(3), .code-column:nth-child(4) { display: none; }
+        }
+        @media (max-width: 420px) {
+            .code-background { grid-template-columns: minmax(0, 1fr); }
+            .code-column:nth-child(2), .code-column:nth-child(6) { display: none; }
+        }
         main, footer { position: relative; z-index: 1; }
         .glow-hover:hover {
             box-shadow: 0 0 8px 1px rgba(129, 140, 248, 0.2);
