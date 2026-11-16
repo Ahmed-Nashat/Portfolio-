@@ -11,3 +11,7 @@
 @media (max-width: 600px) { .admin-login { margin: 8vh 16px; padding: 24px; } .admin-save-bar { position: static; margin-top: 32px; flex-wrap: wrap; } }
 .admin-sidebar { min-width: 0; }
 .admin-status span { white-space: normal; overflow-wrap: anywhere; line-height: 1.6; }
+.record > button, .record > div button, .card-heading > div button { border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; padding: .4rem; }
+.record > button { flex: 1; min-width: 0; }
+.record > div, .card-heading > div { display: flex; gap: .35rem; }
+.record button:disabled, .card-heading button:disabled { opacity: .35; cursor: default; }

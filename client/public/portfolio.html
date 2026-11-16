@@ -158,6 +158,16 @@
         .terminal-code { white-space: normal; }
         .terminal-line { display: block; white-space: pre; opacity: 0; transform: translateY(4px); animation: terminalLineIn 260ms cubic-bezier(.22,1,.36,1) forwards; animation-delay: calc(280ms + (var(--line) * 42ms)); }
         .project-link { transition: transform 180ms ease, color 180ms ease; }
+        .project-details-trigger, .skills-project { background: transparent; border: 1px solid #444; border-radius: 4px; color: #80dfb5; cursor: pointer; padding: .6rem .8rem; font: inherit; }
+        .project-details-trigger:hover, .skills-project:hover { border-color: #80dfb5; }
+        .portfolio-dialog { color: #e4e2e1; background: #1b1b1b; border: 1px solid #555; border-radius: 8px; width: min(720px, 90vw); max-height: 85vh; padding: 1.5rem; }
+        .portfolio-dialog::backdrop { background: rgba(0,0,0,.8); }
+        .portfolio-dialog h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .portfolio-dialog h4 { color: #bdbbff; margin-top: 1rem; }
+        .portfolio-dialog p { white-space: pre-wrap; margin-top: .4rem; }
+        .portfolio-dialog img { max-width: 100%; height: auto; margin-top: 1rem; border-radius: 4px; }
+        .skills-evidence { margin-top: 1.5rem; display: grid; gap: .75rem; }
+        .skills-evidence-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
         /* Content-sized bento cards: a final unpaired project fills the row. */
         #projects > .grid { grid-template-columns: minmax(0, 1fr); }
         #projects .project-card { grid-column: auto; min-width: 0; display: flex; flex-direction: column; }
@@ -464,6 +474,7 @@ while (curious) {
   });
   (async () => {
   const savedContent = await (async () => {
+    if (new URLSearchParams(location.search).get('preview') === '1') { try { return JSON.parse(sessionStorage.getItem('portfolio-preview-draft')); } catch (_) { return null; } }
     try {
       const response = await fetch('/api/content', { signal: AbortSignal.timeout(5000) });
       if (response.ok) return (await response.json()).content;
@@ -481,6 +492,7 @@ while (curious) {
     const githubCommand = document.querySelector('#command-menu a');
     if (githubCommand && savedContent.contact?.github) githubCommand.href = savedContent.contact.github;
     const about = document.querySelector('#home + section .relative');
+    if (about && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(savedContent.about?.portrait || '')) about.querySelector('img').src = savedContent.about.portrait;
     if (about && savedContent.about) { const paragraphs = about.querySelectorAll('p'); if (paragraphs[1]) paragraphs[1].textContent = savedContent.about.intro; if (paragraphs[2]) paragraphs[2].textContent = savedContent.about.body; }
     const philosophyList = document.querySelector('#home + section ul');
     if (philosophyList && Array.isArray(savedContent.about?.philosophies)) { philosophyList.replaceChildren(...savedContent.about.philosophies.map((item) => { const li = document.createElement('li'); li.textContent = item; return li; })); }
@@ -491,7 +503,19 @@ while (curious) {
     if (stackWrap && Array.isArray(savedContent.stack)) { stackWrap.replaceChildren(...savedContent.stack.map((item, index) => { const tag = document.createElement('span'); tag.className = `border border-outline-variant px-sm py-xs rounded ${index % 3 === 0 ? 'text-tertiary' : index % 3 === 1 ? 'text-secondary' : 'text-primary'}`; tag.textContent = item; return tag; })); }
     const makeProject = (item) => { const article = document.createElement('article'); article.className = 'project-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden glow-hover transition-all duration-300'; const header = document.createElement('div'); header.className = 'px-md py-sm border-b border-outline-variant flex items-center justify-between font-code-md text-code-md'; const title = document.createElement('span'); const marker = document.createElement('span'); marker.className = 'text-secondary'; marker.textContent = '> '; title.append(marker, document.createTextNode(item.name)); const isMoon = typeof item.icon === 'string' && item.icon.trim().toLowerCase() === 'moon'; const icon = isMoon ? document.createElementNS('http://www.w3.org/2000/svg', 'svg') : document.createElement('span'); if (isMoon) { icon.setAttribute('viewBox', '0 0 24 24'); icon.setAttribute('width', '24'); icon.setAttribute('height', '24'); icon.setAttribute('fill', 'none'); icon.setAttribute('stroke', 'currentColor'); icon.setAttribute('stroke-width', '2'); icon.setAttribute('stroke-linecap', 'round'); icon.setAttribute('stroke-linejoin', 'round'); const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', 'M20.9 13.3A9 9 0 0 1 10.7 3.1 9 9 0 1 0 20.9 13.3Z'); icon.append(path); icon.classList.add('text-outline', 'project-moon-icon'); } else { icon.className = 'material-symbols-outlined text-outline'; icon.textContent = item.icon || 'code'; } icon.setAttribute('aria-hidden', 'true'); header.append(title, icon); const body = document.createElement('div'); body.className = 'p-md'; const description = document.createElement('p'); description.className = 'text-on-surface-variant text-sm sm:text-base leading-relaxed'; description.textContent = item.description; const skills = document.createElement('div'); skills.className = 'flex flex-wrap gap-xs mt-md font-code-sm'; (item.skills || []).forEach((skill, index) => { const tag = document.createElement('span'); tag.className = `border border-outline-variant px-sm py-xs rounded ${index % 3 === 0 ? 'text-tertiary' : index % 3 === 1 ? 'text-secondary' : 'text-primary'}`; tag.textContent = skill; skills.append(tag); }); body.append(description, skills); const actions = PortfolioProjectLinks.renderActions(item); if (actions) body.append(actions); article.append(header, body); return article; };
     const projectGrid = document.querySelector('#projects .grid');
-    if (projectGrid && Array.isArray(savedContent.projects)) projectGrid.replaceChildren(...savedContent.projects.map(makeProject));
+    if (projectGrid && Array.isArray(savedContent.projects)) {
+      const dialog = document.createElement('dialog'); dialog.className = 'portfolio-dialog'; dialog.setAttribute('aria-label', 'Project details'); document.body.append(dialog);
+      const showProject = item => {
+        dialog.replaceChildren(); const close = document.createElement('button'); close.className = 'project-details-trigger'; close.textContent = 'CLOSE ×'; close.addEventListener('click', () => dialog.close()); dialog.append(close);
+        const heading = document.createElement('h3'); heading.textContent = item.name; dialog.append(heading);
+        const section = (label, value) => { if (!value) return; const title = document.createElement('h4'); title.textContent = label; const body = document.createElement('p'); body.textContent = value; dialog.append(title, body); };
+        section('Overview', item.description); section('Problem / challenge', item.problem); section('My role', item.role); section('Key features', item.features); section('Technologies', (item.skills || []).join(' · '));
+        for (const value of (item.screenshots || '').split('\n').map(value => value.trim()).filter(Boolean)) { try { const u = new URL(value); if (!['http:', 'https:'].includes(u.protocol) || u.username || u.password) continue; const img = document.createElement('img'); img.src = u.href; img.alt = `${item.name} screenshot`; img.loading = 'lazy'; dialog.append(img); } catch (_) {} }
+        const actions = PortfolioProjectLinks.renderActions(item); if (actions) dialog.append(actions); dialog.showModal();
+      };
+      projectGrid.replaceChildren(...savedContent.projects.map(item => { const card = makeProject(item); const button = document.createElement('button'); button.type = 'button'; button.className = 'project-details-trigger'; button.textContent = 'VIEW_DETAILS ↗'; button.addEventListener('click', () => showProject(item)); card.lastElementChild.append(button); return card; }));
+      if (savedContent.site?.skillsEvidence) { const target = document.querySelector('#stack'); const evidence = document.createElement('div'); evidence.className = 'skills-evidence'; const heading = document.createElement('h3'); heading.textContent = 'SKILLS IN PRACTICE'; evidence.append(heading); for (const skill of savedContent.stack || []) { const matches = savedContent.projects.filter(item => (item.skills || []).some(value => value.trim().toLowerCase() === skill.trim().toLowerCase())); if (!matches.length) continue; const row = document.createElement('div'); row.className = 'skills-evidence-row'; const label = document.createElement('strong'); label.textContent = `${skill}:`; row.append(label); matches.forEach(item => { const button = document.createElement('button'); button.className = 'skills-project'; button.textContent = item.name; button.addEventListener('click', () => showProject(item)); row.append(button); }); evidence.append(row); } target.append(evidence); }
+    }
     const makeExperience = (item, index, list) => { const row = document.createElement('div'); row.className = `grid grid-cols-1 sm:grid-cols-[110px_1fr] md:grid-cols-[180px_1fr] ${index < list.length - 1 ? 'border-b border-outline-variant' : ''} p-sm sm:p-md gap-sm sm:gap-md`; const date = document.createElement('p'); date.className = 'font-code-sm text-tertiary'; date.textContent = item.date; const body = document.createElement('div'); const title = document.createElement('h3'); title.className = 'font-bold text-on-surface'; title.textContent = item.title; const subtitle = document.createElement('p'); subtitle.className = 'text-on-surface-variant mt-xs'; subtitle.textContent = item.subtitle; const description = document.createElement('p'); description.className = 'text-on-surface-variant mt-sm'; description.textContent = item.description; const status = document.createElement('p'); status.className = 'font-code-sm text-secondary mt-sm'; status.textContent = `STATUS: ${item.status}`; body.append(title, subtitle, description, status); row.append(date, body); return row; };
     const experienceWrap = document.querySelector('#experience > div:last-child');
     if (experienceWrap && Array.isArray(savedContent.experience)) experienceWrap.replaceChildren(...savedContent.experience.map((item, index, list) => makeExperience(item, index, list)));

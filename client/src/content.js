@@ -1,6 +1,6 @@
 import '../public/project-links.js';
 export const normalizeProject = globalThis.PortfolioProjectLinks.normalizeProject;
-export function normalizeContent(content) { return { ...content, projects: content.projects.map(normalizeProject) }; }
+export function normalizeContent(content) { return { ...content, site: { ...content.site, skillsEvidence: content.site.skillsEvidence ?? false }, about: { ...content.about, portrait: content.about.portrait ?? '' }, projects: content.projects.map(item => ({ ...normalizeProject(item), problem: item.problem ?? '', role: item.role ?? '', features: item.features ?? '', screenshots: item.screenshots ?? '' })) }; }
 
 export const defaultContent = {
   site: {
@@ -32,6 +32,7 @@ export const defaultContent = {
 };
 
 defaultContent.projects = defaultContent.projects.map(normalizeProject);
+Object.assign(defaultContent, normalizeContent(defaultContent));
 
 export function validateImport(value, template = defaultContent) {
   if (Array.isArray(template)) {
@@ -40,5 +41,6 @@ export function validateImport(value, template = defaultContent) {
   } else if (template && typeof template === 'object') {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Invalid section');
     Object.keys(template).forEach(key => validateImport(value[key], template[key]));
-  } else if (typeof value !== 'string' || value.length > 8000) throw new Error('Invalid text');
+  } else if (typeof template === 'boolean') { if (typeof value !== 'boolean') throw new Error('Invalid setting');
+  } else if (typeof value !== 'string' || value.length > (template === defaultContent.about.portrait ? 110000 : 8000)) throw new Error('Invalid text');
 }

@@ -31,6 +31,21 @@ test('server saves both fields, migrates old backups, and allows clearing both',
   migrated.projects[0].liveUrl = 'javascript:alert(1)';
   assert.throws(() => validateContent(migrated), /Links/);
 });
+test('new project details and optional skills setting survive validation while older data receives safe defaults', async () => {
+  const { defaultContent } = await import('../client/src/content.js');
+  const content = structuredClone(defaultContent);
+  content.site.skillsEvidence = true;
+  Object.assign(content.projects[0], { problem: 'Challenge', role: 'Developer', features: 'Search', screenshots: 'https://example.com/screen.png' });
+  const saved = validateContent(content);
+  assert.equal(saved.site.skillsEvidence, true);
+  assert.equal(saved.projects[0].role, 'Developer');
+  assert.equal(saved.projects[0].screenshots, 'https://example.com/screen.png');
+  delete content.site.skillsEvidence; delete content.projects[0].problem;
+  assert.equal(validateContent(content).site.skillsEvidence, false);
+  assert.equal(validateContent(content).projects[0].problem, '');
+  content.projects[0].screenshots = 'javascript:alert(1)';
+  assert.throws(() => validateContent(content));
+});
 test('rendered actions have independent destinations, icons, safe new tabs, and accessible labels', () => {
   const element = tag => ({ tag, children: [], attributes: {}, append(...items) { this.children.push(...items); }, setAttribute(key, value) { this.attributes[key] = value; } });
   const doc = { createElement: element, createElementNS: (_, tag) => element(tag), createTextNode: text => ({ text }) };
