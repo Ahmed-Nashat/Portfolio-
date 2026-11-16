@@ -164,7 +164,9 @@
         .hero-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
         .hero-actions a { display: inline-flex; align-items: center; min-height: 44px; padding: .6rem .85rem; border: 1px solid #68fcbf; border-radius: 4px; color: #80dfb5; font: 12px 'JetBrains Mono', monospace; transition: background-color 180ms ease, transform 180ms ease; }
         .hero-actions a:hover { background: #68fcbf18; transform: translateY(-2px); }
-        .hero-actions a:focus-visible, .nav-link:focus-visible, #command-toggle:focus-visible { outline: 2px solid #80dfb5; outline-offset: 3px; }
+        .hero-actions a:focus-visible, #command-toggle:focus-visible { outline: 2px solid #80dfb5; outline-offset: 3px; }
+        .portfolio-nav .nav-link:focus-visible { outline: none; box-shadow: none; color: #80dfb5; }
+        .portfolio-nav .nav-link:focus-visible::after { transform: scaleX(1); }
         .portfolio-nav .nav-link { position: relative; border-color: transparent !important; }
         .portfolio-nav .nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #80dfb5; transform: scaleX(0); transform-origin: left; transition: transform 220ms ease; }
         .portfolio-nav .nav-link[aria-current='page']::after { transform: scaleX(1); }
